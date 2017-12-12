@@ -87,22 +87,21 @@ namespace AnimeTitle
 
         public void cleanAllFocus()
         {
-            foreach (ListCell lc in Leftpanel.Controls)
+            foreach (L_ListCell llc in Leftpanel.Controls)
             {
-                if (lc.focus)
+                if (llc.focus)
                 {
-                    lc.cleanFocus();
-                    lc.canaelRename();
-                    lc.Refresh();
+                    llc.cleanFocus();
+                    llc.Refresh();
                 }
             }
-            foreach (ListCell lc in Rightpanel.Controls)
+            foreach (R_ListCell rlc in Rightpanel.Controls)
             {
-                if (lc.focus)
+                if (rlc.focus)
                 {
-                    lc.cleanFocus();
-                    lc.canaelRename();
-                    lc.Refresh();
+                    rlc.cleanFocus();
+                    rlc.canaelRename();
+                    rlc.Refresh();
                 }
             }
         }
@@ -119,7 +118,7 @@ namespace AnimeTitle
             Leftpanel.Controls.Clear();
             foreach (string str in leftList)
             {
-                ListCell lc = new ListCell(str, this,true);
+                L_ListCell lc = new L_ListCell(str, this);
                 Add(lc, 1);
             }
 
@@ -133,7 +132,7 @@ namespace AnimeTitle
             Rightpanel.Controls.Clear();
             foreach (string str in rightList)
             {
-                ListCell lc = new ListCell(str, this,false);
+                R_ListCell lc = new R_ListCell(str, this);
                 Add(lc, 3);
             }
         }
@@ -145,7 +144,7 @@ namespace AnimeTitle
                 Leftpanel.Controls.Clear();
                 foreach (string str in leftList)
                 {
-                    ListCell lc = new ListCell(str, this,true);
+                    L_ListCell lc = new L_ListCell(str, this);
                     Add(lc, 1);
                 }
             }
@@ -154,7 +153,7 @@ namespace AnimeTitle
                 Rightpanel.Controls.Clear();
                 foreach (string str in rightList)
                 {
-                    ListCell lc = new ListCell(str, this,false);
+                    R_ListCell lc = new R_ListCell(str, this);
                     Add(lc, 3);
                 }
             }
@@ -169,11 +168,11 @@ namespace AnimeTitle
 
         public void renameSelectedCell()
         {
-            foreach(ListCell rightLc in Rightpanel.Controls)
+            foreach(R_ListCell rlc in Rightpanel.Controls)
             {
-                if (rightLc.focus)
+                if (rlc.focus)
                 {
-                    rightLc.rename();
+                    rlc.rename();
                 }
             }
         }

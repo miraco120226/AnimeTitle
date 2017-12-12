@@ -10,9 +10,20 @@ namespace AnimeTitle
 {
     public partial class L_ListCell : AnimeTitle.ListCell
     {
+        Label TextLabel;
+
         public L_ListCell()
         {
             InitializeComponent();
+        }
+
+        public L_ListCell(string input, ListControl owner)
+        {
+            TextLabel = GetTextLabel();
+            lc = owner;
+            text = input;
+            TextLabel.Text = text;
+            KeyDown += ListCell_KeyDown;
         }
 
         private void ListCell_KeyDown(object sender, KeyEventArgs e)

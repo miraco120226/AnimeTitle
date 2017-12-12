@@ -305,7 +305,6 @@ namespace AnimeTitle
         {
             foreach(ListViewItem selected in listView1.SelectedItems)
             {
-                Console.WriteLine();
                 left.Add(selected.SubItems[1].Text);
             }
             lco.refresh();
@@ -315,7 +314,6 @@ namespace AnimeTitle
         {
             foreach (ListViewItem item in listView1.Items)
             {
-                Console.WriteLine();
                 left.Add(item.SubItems[1].Text);
             }
             lco.refresh();
@@ -327,17 +325,6 @@ namespace AnimeTitle
             if (e.KeyCode.ToString().Equals("F2"))
             {
                 ((ListControl)listPanel.Controls[0]).renameSelectedCell();
-            }
-            if (e.KeyCode.ToString().Equals("Delete"))
-            {
-                //if (ActiveControl.GetType().ToString().Equals("AnimeTitle.ListControl") && ((ListControl)listPanel.Controls[0]).getFocusCell()!=null)
-                //{
-                //    Console.WriteLine(((ListControl)listPanel.Controls[0]).getFocusCell().focus);
-                //}
-            }
-            if (e.KeyCode.ToString().Equals("C"))
-            {
-
             }
         }
 
