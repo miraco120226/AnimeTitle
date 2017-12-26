@@ -168,11 +168,18 @@ namespace AnimeTitle
 
         public void renameSelectedCell()
         {
-            foreach(R_ListCell rlc in Rightpanel.Controls)
+            foreach (R_ListCell rlc in Rightpanel.Controls)
             {
                 if (rlc.focus)
                 {
                     rlc.rename();
+                }
+            }
+            foreach (L_ListCell llc in Leftpanel.Controls)
+            {
+                if (llc.focus)
+                {
+                    llc.rename();
                 }
             }
         }

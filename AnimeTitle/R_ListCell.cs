@@ -14,6 +14,7 @@ namespace AnimeTitle
     {
 
         Label TextLabel;
+        TextBox editName;
         string fullPath;
         string path;
 
@@ -26,6 +27,7 @@ namespace AnimeTitle
         {
             InitializeComponent();
             TextLabel = GetTextLabel();
+            editName = GetEditLabel();
             fullPath = input;
 
             try
@@ -39,33 +41,11 @@ namespace AnimeTitle
                 text = "null";
             }
 
-            editName.AutoSize = false;
-            editName.Width = width;
-            editName.Height = height;
-            editName.Text = text;
-
             lc = owner;
             TextLabel.Text = text;
             TextLabel.DoubleClick += TextLabel_DoubleClick;
             KeyDown += ListCell_KeyDown;
-        }
-
-        public void rename()
-        {
-            TextLabel.Visible = false;
-            TextLabel.Enabled = false;
-            editName.Text = TextLabel.Text;
-            editName.Visible = true;
-            editName.Enabled = true;
-        }
-
-        public void canaelRename()
-        {
-            TextLabel.Visible = true;
-            TextLabel.Enabled = true;
-            editName.Text = TextLabel.Text;
-            editName.Visible = false;
-            editName.Enabled = false;
+            editName.KeyDown += editName_KeyDown;
         }
 
         public bool renameFile(string newName)

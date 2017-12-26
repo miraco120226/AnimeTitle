@@ -11,6 +11,7 @@ namespace AnimeTitle
     public partial class L_ListCell : AnimeTitle.ListCell
     {
         Label TextLabel;
+        TextBox editName;
 
         public L_ListCell()
         {
@@ -20,10 +21,12 @@ namespace AnimeTitle
         public L_ListCell(string input, ListControl owner)
         {
             TextLabel = GetTextLabel();
+            editName = GetEditLabel();
             lc = owner;
             text = input;
             TextLabel.Text = text;
             KeyDown += ListCell_KeyDown;
+            editName.KeyDown += editName_KeyDown;
         }
 
         private void ListCell_KeyDown(object sender, KeyEventArgs e)
@@ -45,6 +48,25 @@ namespace AnimeTitle
                 left.Remove(this);
 
                 lc.owner.AutoScrollPosition = new Point(0, -y);
+            }
+        }
+
+        private void editName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((int)e.KeyCode == 13)
+            {
+                e.SuppressKeyPress = true;
+                ControlCollection left = lc.Controls[2].Controls;
+                int index = left.IndexOf(this);
+
+                lc.leftList[index] = editName.Text;
+                text = editName.Text;
+                TextLabel.Text = editName.Text;
+
+                TextLabel.Visible = true;
+                TextLabel.Enabled = true;
+                editName.Visible = false;
+                editName.Enabled = false;
             }
         }
     }

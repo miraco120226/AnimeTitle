@@ -26,6 +26,29 @@ namespace AnimeTitle
             InitializeComponent();
             Width = width;
             Height = height;
+
+            editName.AutoSize = false;
+            editName.Width = width;
+            editName.Height = height;
+            editName.Text = text;
+        }
+
+        public void rename()
+        {
+            TextLabel.Visible = false;
+            TextLabel.Enabled = false;
+            editName.Text = TextLabel.Text;
+            editName.Visible = true;
+            editName.Enabled = true;
+        }
+
+        public void canaelRename()
+        {
+            TextLabel.Visible = true;
+            TextLabel.Enabled = true;
+            editName.Text = TextLabel.Text;
+            editName.Visible = false;
+            editName.Enabled = false;
         }
 
         private void ListControl_Paint(object sender, PaintEventArgs e)
@@ -94,6 +117,11 @@ namespace AnimeTitle
         protected Label GetTextLabel()
         {
             return TextLabel;
+        }
+
+        protected TextBox GetEditLabel()
+        {
+            return editName;
         }
 
     }

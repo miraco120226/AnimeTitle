@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // L_ListCell
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.Name = "L_ListCell";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

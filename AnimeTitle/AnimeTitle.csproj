@@ -142,6 +142,9 @@
     <EmbeddedResource Include="ListControl.resx">
       <DependentUpon>ListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="L_ListCell.resx">
+      <DependentUpon>L_ListCell.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MiddleCell.resx">
       <DependentUpon>MiddleCell.cs</DependentUpon>
     </EmbeddedResource>
