@@ -15,189 +15,61 @@ namespace AnimeTitle
     {
         public List<string> leftList;
         public List<string> rightList;
-        int btnWidth = 40;
+        int MiddleWidth = 40;
         public Panel owner;
+        public CellManager cm;
 
-        public ListControl(List<string> left, List<string> right, Panel p)
+        public ListControl(Panel p)
         {
             InitializeComponent();
 
             owner = p;
 
-            Leftpanel.Width = ListCell.width;
-            Middlepanel.Width = btnWidth;
-            Middlepanel.Location = new Point(Leftpanel.Width,0);
-            Rightpanel.Width = ListCell.width;
-            Rightpanel.Location = new Point(Leftpanel.Width + Middlepanel.Width,0);
-            Width = Leftpanel.Width + Middlepanel.Width + Rightpanel.Width;
-            Leftpanel.Height = 0;
-            Middlepanel.Height = 0;
-            Rightpanel.Height = 0;
+            LeftNumPanel.Width = N_ListCell.width;
+            LeftNumPanel.Location = new Point(0, 0);
+            LeftPanel.Width = L_ListCell.width;
+            LeftPanel.Location = new Point(LeftNumPanel.Width, 0);
+            MiddlePanel.Width = MiddleWidth;
+            MiddlePanel.Location = new Point(LeftNumPanel.Width + LeftPanel.Width,0);
+            RightPanel.Width = R_ListCell.width;
+            RightPanel.Location = new Point(LeftNumPanel.Width + LeftPanel.Width + MiddlePanel.Width,0);
+
+            Width = LeftNumPanel.Width + LeftPanel.Width + MiddlePanel.Width + RightPanel.Width;
+            LeftNumPanel.Height = 0;
+            LeftPanel.Height = 0;
+            MiddlePanel.Height = 0;
+            RightPanel.Height = 0;
+
             DoubleBuffered = true;
+            PropertyInfo info0 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            info0.SetValue(LeftNumPanel, true, null);
             PropertyInfo info1 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            info1.SetValue(Leftpanel, true, null);
+            info1.SetValue(LeftPanel, true, null);
             PropertyInfo info2 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            info2.SetValue(Middlepanel, true, null);
+            info2.SetValue(MiddlePanel, true, null);
             PropertyInfo info3 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            info3.SetValue(Rightpanel, true, null);
+            info3.SetValue(RightPanel, true, null);
             setBackground(Color.FromArgb(200, 200, 200));
 
-            leftList = left;
-            rightList = right;
+            cm = new CellManager(this,LeftNumPanel.Controls, LeftPanel.Controls, MiddlePanel.Controls, RightPanel.Controls);
 
-            Leftpanel.Click += clickToCleanFocus;
-            Middlepanel.Click += clickToCleanFocus;
-            Rightpanel.Click += clickToCleanFocus;
+            LeftPanel.Click += clickToCleanFocus;
+            MiddlePanel.Click += clickToCleanFocus;
+            RightPanel.Click += clickToCleanFocus;
             Click += clickToCleanFocus;
         }
 
         private void clickToCleanFocus(object sender, EventArgs e)
         {
-            cleanAllFocus();
-        }
-
-        public List<ListCell> findNeighborCell(MiddleCell mc)
-        {
-            
-            int index = Middlepanel.Controls.IndexOf(mc);
-
-            List<ListCell> result = new List<ListCell>();
-
-            result.Add(Leftpanel.Controls.Cast<ListCell>().ToList().ElementAtOrDefault(index));
-            result.Add(Rightpanel.Controls.Cast<ListCell>().ToList().ElementAtOrDefault(index));
-
-            return result;
-        }
-
-        public void Add(Control c,int location)
-        {
-            switch (location)
-            {
-                case 1:
-                    Leftpanel.Controls.Add(c);
-                    break;
-                case 2:
-                    Middlepanel.Controls.Add(c);
-                    break;
-                case 3:
-                    Rightpanel.Controls.Add(c);
-                    break;
-            }
-        }
-
-        public void cleanAllFocus()
-        {
-            foreach (L_ListCell llc in Leftpanel.Controls)
-            {
-                if (llc.focus)
-                {
-                    llc.cleanFocus();
-                    llc.Refresh();
-                }
-            }
-            foreach (R_ListCell rlc in Rightpanel.Controls)
-            {
-                if (rlc.focus)
-                {
-                    rlc.cleanFocus();
-                    rlc.canaelRename();
-                    rlc.Refresh();
-                }
-            }
+            cm.cleanAllFocus();
         }
 
         public void setBackground(Color color)
         {
-            Leftpanel.BackColor = color;
-            Middlepanel.BackColor = color;
-            Rightpanel.BackColor = color;
-        }
-
-        public void refresh()
-        {
-            Leftpanel.Controls.Clear();
-            foreach (string str in leftList)
-            {
-                L_ListCell lc = new L_ListCell(str, this);
-                Add(lc, 1);
-            }
-
-            Middlepanel.Controls.Clear();
-            for (int i = 0; i < Math.Max(leftList.Count, rightList.Count); i++)
-            {
-                MiddleCell mc = new MiddleCell(this);
-                Add(mc, 2);
-            }
-
-            Rightpanel.Controls.Clear();
-            foreach (string str in rightList)
-            {
-                R_ListCell lc = new R_ListCell(str, this);
-                Add(lc, 3);
-            }
-        }
-
-        public void refresh(int location)
-        {
-            if (location == 1)
-            {
-                Leftpanel.Controls.Clear();
-                foreach (string str in leftList)
-                {
-                    L_ListCell lc = new L_ListCell(str, this);
-                    Add(lc, 1);
-                }
-            }
-            else if (location == 2)
-            {
-                Rightpanel.Controls.Clear();
-                foreach (string str in rightList)
-                {
-                    R_ListCell lc = new R_ListCell(str, this);
-                    Add(lc, 3);
-                }
-            }
-
-            int max = Math.Max(Leftpanel.Controls.Count, Rightpanel.Controls.Count);
-
-            if (Middlepanel.Controls.Count > max)
-            {
-                Middlepanel.Controls.RemoveAt(Middlepanel.Controls.Count - 1);
-            }
-        }
-
-        public void renameSelectedCell()
-        {
-            foreach (R_ListCell rlc in Rightpanel.Controls)
-            {
-                if (rlc.focus)
-                {
-                    rlc.rename();
-                }
-            }
-            foreach (L_ListCell llc in Leftpanel.Controls)
-            {
-                if (llc.focus)
-                {
-                    llc.rename();
-                }
-            }
-        }
-
-        public ListCell getFocusCell()
-        {
-            List<ListCell> total = new List<ListCell>();
-            total.AddRange(Leftpanel.Controls.Cast<ListCell>());
-            total.AddRange(Rightpanel.Controls.Cast<ListCell>());
-            foreach (ListCell lc in total)
-            {
-                if (lc.focus)
-                {
-                    return lc;
-                }
-            }
-
-            return null;
+            LeftNumPanel.BackColor = color;
+            LeftPanel.BackColor = color;
+            MiddlePanel.BackColor = color;
+            RightPanel.BackColor = color;
         }
 
     }

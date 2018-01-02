@@ -58,6 +58,7 @@
             this.editName.TabIndex = 4;
             this.editName.Visible = false;
             this.editName.WordWrap = false;
+            this.editName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editName_KeyDown);
             // 
             // ListCell
             // 
@@ -70,6 +71,7 @@
             this.Name = "ListCell";
             this.Size = new System.Drawing.Size(190, 25);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ListControl_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListCell_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Control_MouseDown);
             this.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.Control_MouseLeave);

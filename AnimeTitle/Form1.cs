@@ -33,12 +33,10 @@ namespace AnimeTitle
         {
             InitializeComponent();
 
+            lco = new ListControl(listPanel);
+            lco.cm.addRightCell(@"D:\PICO\ccc\aaa.jpg");
+            lco.cm.addRightCell(@"C:\ddd.mkv");
 
-            right.Add(@"D:\PICO\ccc\aaa.jpg");
-            right.Add(@"C:\ddd.mkv");
-
-            lco = new ListControl(left, right, listPanel);
-            lco.refresh();
             listPanel.Controls.Add(lco);
             listPanel.Width = lco.Width+18;
             listPanel.AutoScrollMinSize = new Size(lco.Width, listPanel.Height+1);
@@ -303,20 +301,18 @@ namespace AnimeTitle
 
         private void add_Click(object sender, EventArgs e)
         {
-            foreach(ListViewItem selected in listView1.SelectedItems)
+            foreach (ListViewItem selected in listView1.SelectedItems)
             {
-                left.Add(selected.SubItems[1].Text);
+                lco.cm.addLeftCell(selected.SubItems[1].Text);
             }
-            lco.refresh();
         }
 
         private void addAll_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in listView1.Items)
             {
-                left.Add(item.SubItems[1].Text);
+                lco.cm.addLeftCell(item.SubItems[1].Text);
             }
-            lco.refresh();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -324,7 +320,7 @@ namespace AnimeTitle
             //Console.WriteLine(e.KeyCode);
             if (e.KeyCode.ToString().Equals("F2"))
             {
-                ((ListControl)listPanel.Controls[0]).renameSelectedCell();
+                lco.cm.getFocusCell().rename();
             }
         }
 
@@ -344,14 +340,13 @@ namespace AnimeTitle
                     else
                     {
                         MessageBox.Show("檔案輸入錯誤");
-                        return;
+                        continue;
                     }
 
-                    right.Add(str);
-                    lco.refresh();
-                    Console.WriteLine(str);
+                    lco.cm.addRightCell(str);
                 }
             }
         }
+
     }
 }

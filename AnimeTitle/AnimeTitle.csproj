@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellManager.cs" />
     <Compile Include="FindPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +95,12 @@
     </Compile>
     <Compile Include="L_ListCell.Designer.cs">
       <DependentUpon>L_ListCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="N_ListCell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="N_ListCell.Designer.cs">
+      <DependentUpon>N_ListCell.cs</DependentUpon>
     </Compile>
     <Compile Include="R_ListCell.cs">
       <SubType>UserControl</SubType>

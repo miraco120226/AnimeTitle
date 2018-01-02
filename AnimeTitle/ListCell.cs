@@ -16,21 +16,52 @@ namespace AnimeTitle
     {
         public bool focus = false;
         public bool isLeft;
-        protected ListControl lc;
+        public CellManager cm;
+        protected ListControl lco;
         protected string text;
-        public static int width = 160;
-        public static int height = 20;
 
         public ListCell()
         {
             InitializeComponent();
-            Width = width;
-            Height = height;
-
             editName.AutoSize = false;
-            editName.Width = width;
-            editName.Height = height;
             editName.Text = text;
+        }
+
+        private void ListCell_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString().Equals("Delete"))
+            {
+                int y = lco.owner.AutoScrollPosition.Y;
+
+                if (this is L_ListCell)
+                {
+                    cm.deleteCell(this as L_ListCell);
+                }
+                else if (this is R_ListCell)
+                {
+                    cm.deleteCell(this as R_ListCell);
+                }
+
+                lco.owner.AutoScrollPosition = new Point(0, -y);
+            }
+        }
+
+        private void editName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((int)e.KeyCode == 13)
+            {
+                e.SuppressKeyPress = true;
+                handleRename();
+                TextLabel.Visible = true;
+                TextLabel.Enabled = true;
+                editName.Visible = false;
+                editName.Enabled = false;
+            }
+        }
+
+        protected virtual void handleRename()
+        {
+
         }
 
         public void rename()
@@ -97,19 +128,19 @@ namespace AnimeTitle
             Refresh();
         }
 
-        public void Control_MouseDown(object sender, MouseEventArgs e)
+        private void Control_MouseDown(object sender, MouseEventArgs e)
         {
-            lc.cleanAllFocus();
+            cm.cleanAllFocus();
             handle_Mouse("MouseDown");
             Focus();
         }
 
-        public void Control_MouseEnter(object sender, EventArgs e)
+        private void Control_MouseEnter(object sender, EventArgs e)
         {
             handle_Mouse("MouseEnter");
         }
 
-        public void Control_MouseLeave(object sender, EventArgs e)
+        private void Control_MouseLeave(object sender, EventArgs e)
         {
             handle_Mouse("MouseLeave");
         }
@@ -123,6 +154,5 @@ namespace AnimeTitle
         {
             return editName;
         }
-
     }
 }

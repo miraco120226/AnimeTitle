@@ -12,7 +12,8 @@ namespace AnimeTitle
 {
     public partial class R_ListCell : AnimeTitle.ListCell
     {
-
+        public static int width = 200;
+        public static int height = 20;
         Label TextLabel;
         TextBox editName;
         string fullPath;
@@ -25,9 +26,14 @@ namespace AnimeTitle
 
         public R_ListCell(string input, ListControl owner)
         {
-            InitializeComponent();
             TextLabel = GetTextLabel();
             editName = GetEditLabel();
+
+            Width = width;
+            Height = height;
+            editName.Width = width;
+            editName.Height = height;
+
             fullPath = input;
 
             try
@@ -41,11 +47,10 @@ namespace AnimeTitle
                 text = "null";
             }
 
-            lc = owner;
+            lco = owner;
+            cm = owner.cm;
             TextLabel.Text = text;
             TextLabel.DoubleClick += TextLabel_DoubleClick;
-            KeyDown += ListCell_KeyDown;
-            editName.KeyDown += editName_KeyDown;
         }
 
         public bool renameFile(string newName)
@@ -73,7 +78,6 @@ namespace AnimeTitle
 
         private void TextLabel_DoubleClick(object sender, EventArgs e)
         {
-            Console.WriteLine("rlc");
             Environment.GetFolderPath(Environment.SpecialFolder.System);
             ProcessStartInfo pInfo = new ProcessStartInfo();
             pInfo.FileName = fullPath;
@@ -88,43 +92,13 @@ namespace AnimeTitle
             }
         }
 
-        private void ListCell_KeyDown(object sender, KeyEventArgs e)
+        protected override void handleRename()
         {
-            if (e.KeyCode.ToString().Equals("Delete"))
+            if (renameFile(editName.Text))
             {
-                int y = lc.owner.AutoScrollPosition.Y;
-                ControlCollection left = lc.Controls[2].Controls;
-                ControlCollection mid = lc.Controls[1].Controls;
-                ControlCollection right = lc.Controls[0].Controls;
-                int index = right.IndexOf(this);
-
-                if (right.Count > left.Count)
-                {
-                    mid.RemoveAt(0);
-                }
-
-                lc.rightList.RemoveAt(index);
-                right.Remove(this);
-
-                lc.owner.AutoScrollPosition = new Point(0, -y);
-            }
-        }
-
-        private void editName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((int)e.KeyCode == 13)
-            {
-                e.SuppressKeyPress = true;
-                if (renameFile(editName.Text))
-                {
-                    fullPath = path + editName.Text;
-                    text = editName.Text;
-                    TextLabel.Text = editName.Text;
-                }
-                TextLabel.Visible = true;
-                TextLabel.Enabled = true;
-                editName.Visible = false;
-                editName.Enabled = false;
+                fullPath = path + editName.Text;
+                text = editName.Text;
+                TextLabel.Text = editName.Text;
             }
         }
     }

@@ -8,19 +8,19 @@ using System.Windows.Forms;
 
 namespace AnimeTitle
 {
-    public partial class L_ListCell : AnimeTitle.ListCell
+    public partial class N_ListCell : AnimeTitle.ListCell
     {
-        public static int width = 200;
+        public static int width = 35;
         public static int height = 20;
         Label TextLabel;
         TextBox editName;
 
-        public L_ListCell()
+        public N_ListCell()
         {
             InitializeComponent();
         }
 
-        public L_ListCell(string input, ListControl owner)
+        public N_ListCell(Double input, ListControl owner)
         {
             TextLabel = GetTextLabel();
             editName = GetEditLabel();
@@ -32,15 +32,30 @@ namespace AnimeTitle
 
             lco = owner;
             cm = owner.cm;
-            text = input;
+            text = input.ToString();
             TextLabel.Text = text;
             TextLabel.DoubleClick += TextLabel_DoubleClick;
         }
 
+        public double getNum()
+        {
+            return double.Parse(text);
+        }
+
+        public void setNum(double num)
+        {
+            text = num.ToString();
+            TextLabel.Text = num.ToString();
+        }
+
         protected override void handleRename()
         {
-            text = editName.Text;
-            TextLabel.Text = editName.Text;
+            if (cm.checkLeftNumRename(this, editName.Text))
+            {
+                text = editName.Text;
+                TextLabel.Text = editName.Text;
+                cm.handleLeftNumCell(this);
+            }
         }
 
         private void TextLabel_DoubleClick(object sender, EventArgs e)

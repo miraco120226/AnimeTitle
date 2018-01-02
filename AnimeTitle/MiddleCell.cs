@@ -13,18 +13,20 @@ namespace AnimeTitle
     public partial class MiddleCell : UserControl
     {
         ListControl lc;
+        CellManager cm;
 
         public MiddleCell(ListControl owner)
         {
             InitializeComponent();
             lc = owner;
+            cm = lc.cm;
         }
 
         private void label1_MouseLeave(object sender, EventArgs e)
         {
             BackColor = Color.White;
             Refresh();
-            List<ListCell> lcList = lc.findNeighborCell(this);
+            List<ListCell> lcList = cm.findNeighborCell(this);
             foreach (ListCell lc in lcList)
             {
                 if (lc != null)
@@ -38,7 +40,7 @@ namespace AnimeTitle
         {
             BackColor = Color.FromArgb(0xE5, 0xF3, 0xFF);
             Refresh();
-            List<ListCell> lcList = lc.findNeighborCell(this);
+            List<ListCell> lcList = cm.findNeighborCell(this);
             foreach (ListCell lc in lcList)
             {
                 if (lc != null)
@@ -50,7 +52,7 @@ namespace AnimeTitle
 
         private void label1_MouseDown(object sender, MouseEventArgs e)
         {
-            lc.cleanAllFocus();
+            lc.cm.cleanAllFocus();
         }
     }
 }
