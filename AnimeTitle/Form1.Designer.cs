@@ -46,9 +46,11 @@
             this.undoRename = new System.Windows.Forms.Button();
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
-            this.upDownPanel = new System.Windows.Forms.Panel();
+            this.DownBtnPanel = new System.Windows.Forms.Panel();
+            this.cleanLeft = new System.Windows.Forms.Button();
+            this.cleanRight = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.upDownPanel.SuspendLayout();
+            this.DownBtnPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchButton
@@ -217,21 +219,46 @@
             this.downButton.UseVisualStyleBackColor = true;
             this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
-            // upDownPanel
+            // DownBtnPanel
             // 
-            this.upDownPanel.Controls.Add(this.downButton);
-            this.upDownPanel.Controls.Add(this.upButton);
-            this.upDownPanel.Location = new System.Drawing.Point(240, 440);
-            this.upDownPanel.Name = "upDownPanel";
-            this.upDownPanel.Size = new System.Drawing.Size(465, 30);
-            this.upDownPanel.TabIndex = 18;
+            this.DownBtnPanel.Controls.Add(this.cleanRight);
+            this.DownBtnPanel.Controls.Add(this.downButton);
+            this.DownBtnPanel.Controls.Add(this.cleanLeft);
+            this.DownBtnPanel.Controls.Add(this.upButton);
+            this.DownBtnPanel.Location = new System.Drawing.Point(240, 440);
+            this.DownBtnPanel.Name = "DownBtnPanel";
+            this.DownBtnPanel.Size = new System.Drawing.Size(465, 30);
+            this.DownBtnPanel.TabIndex = 18;
+            // 
+            // cleanLeft
+            // 
+            this.cleanLeft.Location = new System.Drawing.Point(32, 0);
+            this.cleanLeft.Margin = new System.Windows.Forms.Padding(0);
+            this.cleanLeft.Name = "cleanLeft";
+            this.cleanLeft.Size = new System.Drawing.Size(75, 23);
+            this.cleanLeft.TabIndex = 16;
+            this.cleanLeft.Text = "清除";
+            this.cleanLeft.UseVisualStyleBackColor = true;
+            this.cleanLeft.Click += new System.EventHandler(this.cleanLeft_Click);
+            // 
+            // cleanRight
+            // 
+            this.cleanRight.AllowDrop = true;
+            this.cleanRight.Location = new System.Drawing.Point(358, 0);
+            this.cleanRight.Margin = new System.Windows.Forms.Padding(0);
+            this.cleanRight.Name = "cleanRight";
+            this.cleanRight.Size = new System.Drawing.Size(75, 23);
+            this.cleanRight.TabIndex = 17;
+            this.cleanRight.Text = "清除";
+            this.cleanRight.UseVisualStyleBackColor = true;
+            this.cleanRight.Click += new System.EventHandler(this.cleanRight_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 481);
-            this.Controls.Add(this.upDownPanel);
+            this.Controls.Add(this.DownBtnPanel);
             this.Controls.Add(this.undoRename);
             this.Controls.Add(this.rename);
             this.Controls.Add(this.label2);
@@ -249,7 +276,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.upDownPanel.ResumeLayout(false);
+            this.DownBtnPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,7 +302,9 @@
         private System.Windows.Forms.Button undoRename;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button downButton;
-        private System.Windows.Forms.Panel upDownPanel;
+        private System.Windows.Forms.Panel DownBtnPanel;
+        private System.Windows.Forms.Button cleanRight;
+        private System.Windows.Forms.Button cleanLeft;
     }
 }
 

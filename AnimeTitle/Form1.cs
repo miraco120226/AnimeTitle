@@ -63,9 +63,11 @@ namespace AnimeTitle
             listPanel.AutoScrollMinSize = new Size(lco.Width, listPanel.Height+1);
 
             int dist = 30;
-            upDownPanel.Size = new Size(listPanel.Width, 30);
+            DownBtnPanel.Size = new Size(listPanel.Width, 30);
             upButton.Location = new Point(listPanel.Width / 2 - dist / 2 - upButton.Width, 0);
             downButton.Location = new Point(listPanel.Width / 2 + dist / 2, 0);
+            cleanLeft.Location = new Point(upButton.Location.X - cleanLeft.Width - dist, 0);
+            cleanRight.Location = new Point(downButton.Location.X + downButton.Width + dist, 0);
         }
 
         private string getTableString(string htmlData)
@@ -430,6 +432,16 @@ namespace AnimeTitle
         private void animeName_TextChanged(object sender, EventArgs e)
         {
             lco.cm.title = animeName.Text;
+        }
+
+        private void cleanLeft_Click(object sender, EventArgs e)
+        {
+            lco.cm.cleanLeftCell();
+        }
+
+        private void cleanRight_Click(object sender, EventArgs e)
+        {
+            lco.cm.cleanRightCell();
         }
     }
 }

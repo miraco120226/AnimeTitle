@@ -40,7 +40,7 @@ namespace AnimeTitle
             LeftNumPanel.Height = 0;
             LeftPanel.Height = 0;
             MiddlePanel.Height = 0;
-            RightPanel.Height = 800;
+            RightPanel.Height = 0;
 
             DoubleBuffered = true;
             PropertyInfo info0 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);

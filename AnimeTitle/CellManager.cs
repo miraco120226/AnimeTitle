@@ -55,14 +55,15 @@ namespace AnimeTitle
         public void handleMiddleCell()
         {
             int max = Math.Max(leftControl.Count,rightControl.Count);
+            int count = midControl.Count;
 
-            for (int i = midControl.Count; i < max; i++)
+            for (int i = count; i < max; i++)
             {
                 MiddleCell mc = new MiddleCell(lco);
                 midControl.Add(mc);
             }
 
-            for (int i = max; i < midControl.Count; i++)
+            for (int i = max; i < count; i++)
             {
                 midControl.RemoveAt(0);
             }
@@ -221,6 +222,19 @@ namespace AnimeTitle
             lco.Refresh();
         }
 
+        public void cleanLeftCell()
+        {
+            leftControl.Clear();
+            leftNameControl.Clear();
+            handleMiddleCell();
+        }
+
+        public void cleanRightCell()
+        {
+            rightControl.Clear();
+            handleMiddleCell();
+        }
+
         public int getCellIndex(L_ListCell lc)
         {
             return leftControl.IndexOf(lc);
@@ -254,46 +268,64 @@ namespace AnimeTitle
 
         public bool renameRight()
         {
-            string tmpPath = System.Environment.CurrentDirectory;
-            Directory.CreateDirectory("temp");
-            int timeStamp = Convert.ToInt32(DateTime.UtcNow.AddHours(8).Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
-            FileStream logFile = File.Create(tmpPath + @"\temp\rename-" + timeStamp + ".log");
-            StreamWriter sw = new StreamWriter(logFile);
-
             List<string> fs = getFinalStringList();
             R_ListCell rc;
+            List<string> log = new List<string>();
+            int index;
 
-            for (int i = 0; i < fs.Count; i++)
+            for (index = 0; index < fs.Count; index++)
             {
-                rc = rightControl[i] as R_ListCell;
+                rc = rightControl[index] as R_ListCell;
                 string oldText = rc.getText();
-                if (rc.renameFile(fs[i]))
+                if (rc.renameFile(fs[index]))
                 {
-                    sw.Write(oldText + "|"+ fs[i]);
-                    sw.WriteLine();
+                    log.Add(oldText + "|" + fs[index]);
                 }
                 else
                 {
-                    sw.Flush();
-                    sw.Close();
-                    logFile.Close();
-
-                    for (int j = 0; j < i; j++)
-                    {
-                        rnc.Pop().undo();
-                    }
-
-                    MessageBox.Show("請修正第" + (i + 1) + "個選項");
-                    return false;
+                    break;
                 }
             }
 
-            sw.Flush();
-            sw.Close();
-            logFile.Close();
+            //**********處理暫存檔**********
+            try
+            {
+                string tmpPath = System.Environment.CurrentDirectory;
+                Directory.CreateDirectory("temp");
+                int timeStamp = Convert.ToInt32(DateTime.UtcNow.AddHours(8).Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
+                FileStream logFile = File.Create(tmpPath + @"\temp\rename-" + timeStamp + ".log");
+                StreamWriter sw = new StreamWriter(logFile);
+                foreach (string str in log)
+                {
+                    sw.Write(str);
+                    sw.WriteLine();
+                }
+                sw.Flush();
+                sw.Close();
+                logFile.Close();
+            }
+            catch
+            {
+                MessageBox.Show("暫存檔輸出錯誤");
+            }
+            //**********處理暫存檔**********
 
-            rncn.Push(fs.Count);
-            return true;
+            if (index == fs.Count)
+            {
+                rncn.Push(fs.Count);
+                return true;
+            }
+            else if (index < fs.Count)
+            {
+                for (int j = 0; j < index; j++)
+                {
+                    rnc.Pop().undo();
+                }
+
+                MessageBox.Show("請修正第" + (index + 1) + "個選項");
+                return false;
+            }
+            return false;
         }
 
     }
