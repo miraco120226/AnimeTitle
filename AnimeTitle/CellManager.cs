@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -253,25 +254,45 @@ namespace AnimeTitle
 
         public bool renameRight()
         {
+            string tmpPath = System.Environment.CurrentDirectory;
+            Directory.CreateDirectory("temp");
+            int timeStamp = Convert.ToInt32(DateTime.UtcNow.AddHours(8).Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
+            FileStream logFile = File.Create(tmpPath + @"\temp\rename-" + timeStamp + ".log");
+            StreamWriter sw = new StreamWriter(logFile);
+
             List<string> fs = getFinalStringList();
             R_ListCell rc;
 
             for (int i = 0; i < fs.Count; i++)
             {
                 rc = rightControl[i] as R_ListCell;
-                if (!rc.renameFile(fs[i]))
+                string oldText = rc.getText();
+                if (rc.renameFile(fs[i]))
                 {
+                    sw.Write(oldText + "|"+ fs[i]);
+                    sw.WriteLine();
+                }
+                else
+                {
+                    sw.Flush();
+                    sw.Close();
+                    logFile.Close();
+
                     for (int j = 0; j < i; j++)
                     {
                         rnc.Pop().undo();
                     }
-                   
-                    MessageBox.Show("請修正第"+(i+1)+"個選項");
-                    break;
+
+                    MessageBox.Show("請修正第" + (i + 1) + "個選項");
+                    return false;
                 }
             }
 
-            rncn.Push(fs.Count);            
+            sw.Flush();
+            sw.Close();
+            logFile.Close();
+
+            rncn.Push(fs.Count);
             return true;
         }
 
