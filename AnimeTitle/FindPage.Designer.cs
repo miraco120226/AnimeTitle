@@ -39,7 +39,7 @@
             // 
             // select
             // 
-            this.select.Font = new System.Drawing.Font("新細明體", 10F);
+            this.select.Font = new System.Drawing.Font("新細明體", 9F);
             this.select.Location = new System.Drawing.Point(620, 15);
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(140, 30);

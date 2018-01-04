@@ -10,11 +10,14 @@ namespace AnimeTitle
 {
     public class CellManager
     {
-        public ControlCollection leftNameControl;
-        public ControlCollection leftControl;
-        public ControlCollection midControl;
-        public ControlCollection rightControl;
+        ControlCollection leftNameControl;
+        ControlCollection leftControl;
+        ControlCollection midControl;
+        ControlCollection rightControl;
+        public String title;
 
+        internal Stack<RenameCommand> rnc = new Stack<RenameCommand>();
+        internal Stack<int> rncn = new Stack<int>();
         public ListControl lco;
 
         public CellManager(ListControl owner, ControlCollection lnc, ControlCollection lc, ControlCollection mc, ControlCollection rc)
@@ -26,6 +29,28 @@ namespace AnimeTitle
             rightControl = rc;
         }
 
+        public int getMaxDigit()
+        {
+            N_ListCell last_cell = leftNameControl[leftNameControl.Count - 1] as N_ListCell;
+            int num = (int)last_cell.getNum();
+            int digit = Math.Max(num.ToString().Length,2);
+            return digit;
+        }
+
+        public string handleNumPad(string input)
+        {
+            double num = double.Parse(input);
+            string result="";
+            int digit = ((int)num).ToString().Length;
+
+            for (int i= digit; i < getMaxDigit(); i ++)
+            {
+                result += "0";
+            }
+
+            return result + num.ToString();
+        }
+        
         public void handleMiddleCell()
         {
             int max = Math.Max(leftControl.Count,rightControl.Count);
@@ -141,10 +166,114 @@ namespace AnimeTitle
             handleMiddleCell();
         }
 
-        public void deleteCell(R_ListCell lc)
+        public void deleteCell(R_ListCell rc)
         {
-            rightControl.Remove(lc);
+            rightControl.Remove(rc);
             handleMiddleCell();
         }
+
+        public void moveCell(L_ListCell lc, int index)
+        {
+            List<L_ListCell> list = leftControl.Cast<L_ListCell>().ToList<L_ListCell>();
+            list.Remove(lc);
+
+            if (index < 0)
+            {
+                index = 0;
+            }
+
+            if (index < list.Count)
+            {
+                list.Insert(index, lc);
+            }
+            else
+            {
+                list.Add(lc);
+            }
+            
+            leftControl.Clear();
+            leftControl.AddRange(list.ToArray());
+            lco.Refresh();
+        }
+
+        public void moveCell(R_ListCell rc, int index)
+        {            
+            List<R_ListCell> list = rightControl.Cast<R_ListCell>().ToList<R_ListCell>();
+            list.Remove(rc);
+
+            if(index < 0)
+            {
+                index = 0;
+            }
+
+            if (index < list.Count)
+            {
+                list.Insert(index, rc);
+            }
+            else
+            {
+                list.Add(rc);
+            }
+
+            rightControl.Clear();
+            rightControl.AddRange(list.ToArray());
+            lco.Refresh();
+        }
+
+        public int getCellIndex(L_ListCell lc)
+        {
+            return leftControl.IndexOf(lc);
+        }
+
+        public int getCellIndex(R_ListCell rc)
+        {
+            return rightControl.IndexOf(rc);
+        }
+
+        public List<string> getFinalStringList()
+        {
+            List<string> fs = new List<string>();
+
+            int count = Math.Min(leftControl.Count, rightControl.Count);
+
+            for(int i = 0; i < count; i++)
+            {
+                string leftnum = (leftNameControl[i] as N_ListCell).getText();
+                leftnum = handleNumPad(leftnum);
+
+                string left = (leftControl[i] as L_ListCell).getText();
+                string extend = (rightControl[i] as R_ListCell).getExtendFileName();
+
+                string final = title + "-" + leftnum + "-" + left + extend;
+                fs.Add(final);
+            }
+
+            return fs;
+        }
+
+        public bool renameRight()
+        {
+            List<string> fs = getFinalStringList();
+            R_ListCell rc;
+
+            for (int i = 0; i < fs.Count; i++)
+            {
+                rc = rightControl[i] as R_ListCell;
+                if (!rc.renameFile(fs[i]))
+                {
+                    for (int j = 0; j < i; j++)
+                    {
+                        rnc.Pop().undo();
+                    }
+                   
+                    MessageBox.Show("請修正第"+(i+1)+"個選項");
+                    break;
+                }
+            }
+
+            rncn.Push(fs.Count);            
+            return true;
+        }
+
     }
 }

@@ -34,7 +34,9 @@
             // 
             // TextLabel
             // 
+            this.TextLabel.AllowDrop = true;
             this.TextLabel.BackColor = System.Drawing.Color.Transparent;
+            this.TextLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextLabel.Font = new System.Drawing.Font("微軟正黑體", 10F);
             this.TextLabel.Location = new System.Drawing.Point(0, 0);
             this.TextLabel.Margin = new System.Windows.Forms.Padding(0);
@@ -46,6 +48,7 @@
             this.TextLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Control_MouseDown);
             this.TextLabel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             this.TextLabel.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
+            this.TextLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TextLabel_MouseMove);
             // 
             // editName
             // 
@@ -67,7 +70,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.editName);
             this.Controls.Add(this.TextLabel);
-            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.Name = "ListCell";
             this.Size = new System.Drawing.Size(190, 25);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ListControl_Paint);

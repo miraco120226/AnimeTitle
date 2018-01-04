@@ -102,6 +102,7 @@
     <Compile Include="N_ListCell.Designer.cs">
       <DependentUpon>N_ListCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="RenameCommand.cs" />
     <Compile Include="R_ListCell.cs">
       <SubType>UserControl</SubType>
     </Compile>

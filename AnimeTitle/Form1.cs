@@ -34,12 +34,38 @@ namespace AnimeTitle
             InitializeComponent();
 
             lco = new ListControl(listPanel);
-            lco.cm.addRightCell(@"D:\PICO\ccc\aaa.jpg");
-            lco.cm.addRightCell(@"C:\ddd.mkv");
+            //lco.cm.addRightCell(@"D:\PICO\ccc\111.jpg");
+            //lco.cm.addRightCell(@"C:\222.mkv");
+            //lco.cm.addRightCell(@"C:\333.mkv");
+            //lco.cm.addRightCell(@"C:\444.mkv");
+            //lco.cm.addRightCell(@"C:\555.mkv");
+            //lco.cm.addRightCell(@"C:\666.mkv");
+            //lco.cm.addRightCell(@"C:\777.mkv");
+            //lco.cm.addRightCell(@"C:\888.mkv");
+
+            lco.cm.addRightCell(@"D:\test\1.txt");
+            lco.cm.addRightCell(@"D:\test\2.txt");
+            lco.cm.addRightCell(@"D:\test\3.txt");
+            lco.cm.addRightCell(@"D:\test\4.txt");
+            lco.cm.addRightCell(@"D:\test\5.txt");
+            lco.cm.addRightCell(@"D:\test\6.txt");
+            lco.cm.addRightCell(@"D:\test\7.txt");
+            lco.cm.addRightCell(@"D:\test\8.txt");
+            lco.cm.addRightCell(@"D:\test\9.txt");
+            lco.cm.addRightCell(@"D:\test\10.txt");
+            lco.cm.addRightCell(@"D:\test\11.txt");
+            lco.cm.addRightCell(@"D:\test\12.txt");
+            lco.cm.addRightCell(@"D:\test\13.txt");
+
 
             listPanel.Controls.Add(lco);
             listPanel.Width = lco.Width+18;
             listPanel.AutoScrollMinSize = new Size(lco.Width, listPanel.Height+1);
+
+            int dist = 30;
+            upDownPanel.Size = new Size(listPanel.Width, 30);
+            upButton.Location = new Point(listPanel.Width / 2 - dist / 2 - upButton.Width, 0);
+            downButton.Location = new Point(listPanel.Width / 2 + dist / 2, 0);
         }
 
         private string getTableString(string htmlData)
@@ -297,6 +323,7 @@ namespace AnimeTitle
             {
                 MessageBox.Show("發生錯誤");
             }
+            animeName.Text = searchName.Text;
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -320,7 +347,11 @@ namespace AnimeTitle
             //Console.WriteLine(e.KeyCode);
             if (e.KeyCode.ToString().Equals("F2"))
             {
-                lco.cm.getFocusCell().rename();
+                ListCell lc = lco.cm.getFocusCell();
+                if (lc!=null)
+                {
+                    lc.rename();
+                }
             }
         }
 
@@ -348,5 +379,57 @@ namespace AnimeTitle
             }
         }
 
+        private void upButton_Click(object sender, EventArgs e)
+        {
+            Control ctrl = lco.cm.getFocusCell();
+            if (ctrl is L_ListCell)
+            {
+                int index = lco.cm.getCellIndex(ctrl as L_ListCell);
+                lco.cm.moveCell(ctrl as L_ListCell, index - 1);
+            }
+            else if (ctrl is R_ListCell)
+            {
+                int index = lco.cm.getCellIndex(ctrl as R_ListCell);
+                lco.cm.moveCell(ctrl as R_ListCell, index - 1);
+            }
+        }
+
+        private void downButton_Click(object sender, EventArgs e)
+        {
+            Control ctrl = lco.cm.getFocusCell();
+            if (ctrl is L_ListCell)
+            {
+                int index = lco.cm.getCellIndex(ctrl as L_ListCell);
+                lco.cm.moveCell(ctrl as L_ListCell, index + 1);
+            }
+            else if (ctrl is R_ListCell)
+            {
+                int index = lco.cm.getCellIndex(ctrl as R_ListCell);
+                lco.cm.moveCell(ctrl as R_ListCell, index + 1);
+            }
+            
+        }
+
+        private void rename_Click(object sender, EventArgs e)
+        {
+            lco.cm.renameRight();
+        }
+
+        private void undoRename_Click(object sender, EventArgs e)
+        {
+            if (lco.cm.rnc.Count != 0)
+            {
+                int count = lco.cm.rncn.Pop();
+                for (int i = 0; i < count; i++)
+                {
+                    lco.cm.rnc.Pop().undo();
+                }
+            }
+        }
+
+        private void animeName_TextChanged(object sender, EventArgs e)
+        {
+            lco.cm.title = animeName.Text;
+        }
     }
 }

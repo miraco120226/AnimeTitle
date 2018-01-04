@@ -53,7 +53,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.Name = "MiddleCell";
             this.Size = new System.Drawing.Size(40, 20);
             this.ResumeLayout(false);

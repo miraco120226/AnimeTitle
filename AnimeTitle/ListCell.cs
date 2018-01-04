@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace AnimeTitle
 {
@@ -82,15 +83,20 @@ namespace AnimeTitle
             editName.Enabled = false;
         }
 
+        public string getText()
+        {
+            return TextLabel.Text;
+        }
+
         private void ListControl_Paint(object sender, PaintEventArgs e)
         {
             if (focus)
             {
-                Pen p = new Pen(Color.FromArgb(0x89, 0xCA, 0xFF), 2);
+                Pen p = new Pen(Color.FromArgb(0x89, 0xCA, 0xFF), 1);
                 Graphics g = e.Graphics;
-                g.DrawRectangle(p, new Rectangle(0, 0, this.Width, this.Height));
+                g.DrawRectangle(p, new Rectangle(0, 0, this.Width-1, this.Height-1));
                 this.BackColor = Color.FromArgb(0xCC, 0xE8, 0xFF);
-            }
+            }            
         }
 
         public void cleanFocus()
@@ -154,5 +160,14 @@ namespace AnimeTitle
         {
             return editName;
         }
+
+        private void TextLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && (this is L_ListCell || this is R_ListCell) )
+            {
+                DoDragDrop(this, DragDropEffects.Move);
+            }
+        }
+
     }
 }

@@ -36,14 +36,20 @@
             // 
             // LeftPanel
             // 
+            this.LeftPanel.AllowDrop = true;
             this.LeftPanel.AutoSize = true;
             this.LeftPanel.BackColor = System.Drawing.Color.Red;
             this.LeftPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.LeftPanel.Location = new System.Drawing.Point(30, 0);
             this.LeftPanel.Margin = new System.Windows.Forms.Padding(0);
             this.LeftPanel.Name = "LeftPanel";
+            this.LeftPanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.LeftPanel.Size = new System.Drawing.Size(200, 400);
             this.LeftPanel.TabIndex = 3;
+            this.LeftPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DragDrop);
+            this.LeftPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.LeftPanel_DragEnter);
+            this.LeftPanel.DragLeave += new System.EventHandler(this.LeftPanel_DragLeave);
+            this.LeftPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
             // MiddlePanel
             // 
@@ -58,14 +64,20 @@
             // 
             // RightPanel
             // 
+            this.RightPanel.AllowDrop = true;
             this.RightPanel.AutoSize = true;
             this.RightPanel.BackColor = System.Drawing.Color.Blue;
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.RightPanel.Location = new System.Drawing.Point(250, 0);
             this.RightPanel.Margin = new System.Windows.Forms.Padding(0);
             this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.RightPanel.Size = new System.Drawing.Size(200, 400);
             this.RightPanel.TabIndex = 4;
+            this.RightPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DragDrop);
+            this.RightPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.RightPanel_DragEnter);
+            this.RightPanel.DragLeave += new System.EventHandler(this.RightPanel_DragLeave);
+            this.RightPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
             // LeftNumPanel
             // 

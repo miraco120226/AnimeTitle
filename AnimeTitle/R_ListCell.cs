@@ -18,6 +18,7 @@ namespace AnimeTitle
         TextBox editName;
         string fullPath;
         string path;
+        RenameCommand rc;
 
         public R_ListCell()
         {
@@ -38,8 +39,8 @@ namespace AnimeTitle
 
             try
             {
-                text = fullPath.Substring(fullPath.LastIndexOf(@"\") + 1);
-                path = fullPath.Remove(fullPath.LastIndexOf(@"\") + 1, text.Length);
+                text = getText(fullPath);
+                path = getPath(fullPath);
             }
             catch
             {
@@ -53,6 +54,27 @@ namespace AnimeTitle
             TextLabel.DoubleClick += TextLabel_DoubleClick;
         }
 
+        public static string getPath(string fullPath)
+        {
+            string text = fullPath.Substring(fullPath.LastIndexOf(@"\") + 1);
+            return fullPath.Remove(fullPath.LastIndexOf(@"\") + 1, text.Length);
+        }
+
+        public static string getText(string fullPath)
+        {
+            return fullPath.Substring(fullPath.LastIndexOf(@"\") + 1);
+        }
+
+        public void setRightCell(string fullpath)
+        {
+            string path = getPath(fullpath);
+            string name = getText(fullpath);
+
+            fullPath = path + name;
+            text = name;
+            TextLabel.Text = name;
+        }
+
         public bool renameFile(string newName)
         {
             if (!(File.Exists(fullPath)))
@@ -62,18 +84,17 @@ namespace AnimeTitle
             }
             else
             {
-                try
+                rc = new RenameCommand(fullPath, path + newName,this);
+                if (rc.execute())
                 {
-                    File.Move(fullPath, path + newName);
+                    lco.cm.rnc.Push(rc);
+                    return true;
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("重新命名失敗");
                     return false;
                 }
             }
-
-            return true;
         }
 
         private void TextLabel_DoubleClick(object sender, EventArgs e)
@@ -96,10 +117,13 @@ namespace AnimeTitle
         {
             if (renameFile(editName.Text))
             {
-                fullPath = path + editName.Text;
-                text = editName.Text;
-                TextLabel.Text = editName.Text;
+                lco.cm.rncn.Push(1);
             }
+        }
+
+        public string getExtendFileName()
+        {
+            return text.Substring(text.LastIndexOf("."));
         }
     }
 }

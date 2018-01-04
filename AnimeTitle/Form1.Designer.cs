@@ -40,7 +40,15 @@
             this.addAll = new System.Windows.Forms.Button();
             this.addfile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.animeName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rename = new System.Windows.Forms.Button();
+            this.undoRename = new System.Windows.Forms.Button();
+            this.upButton = new System.Windows.Forms.Button();
+            this.downButton = new System.Windows.Forms.Button();
+            this.upDownPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.upDownPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchButton
@@ -147,11 +155,87 @@
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.RestoreDirectory = true;
             // 
+            // animeName
+            // 
+            this.animeName.Font = new System.Drawing.Font("新細明體", 10F);
+            this.animeName.Location = new System.Drawing.Point(295, 4);
+            this.animeName.Name = "animeName";
+            this.animeName.Size = new System.Drawing.Size(150, 23);
+            this.animeName.TabIndex = 12;
+            this.animeName.TextChanged += new System.EventHandler(this.animeName_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(240, 10);
+            this.label2.Margin = new System.Windows.Forms.Padding(0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "動畫標題";
+            // 
+            // rename
+            // 
+            this.rename.Location = new System.Drawing.Point(502, 5);
+            this.rename.Name = "rename";
+            this.rename.Size = new System.Drawing.Size(75, 23);
+            this.rename.TabIndex = 14;
+            this.rename.Text = "改名";
+            this.rename.UseVisualStyleBackColor = true;
+            this.rename.Click += new System.EventHandler(this.rename_Click);
+            // 
+            // undoRename
+            // 
+            this.undoRename.Location = new System.Drawing.Point(617, 5);
+            this.undoRename.Name = "undoRename";
+            this.undoRename.Size = new System.Drawing.Size(75, 23);
+            this.undoRename.TabIndex = 15;
+            this.undoRename.Text = "復原改名";
+            this.undoRename.UseVisualStyleBackColor = true;
+            this.undoRename.Click += new System.EventHandler(this.undoRename_Click);
+            // 
+            // upButton
+            // 
+            this.upButton.Location = new System.Drawing.Point(130, 0);
+            this.upButton.Margin = new System.Windows.Forms.Padding(0);
+            this.upButton.Name = "upButton";
+            this.upButton.Size = new System.Drawing.Size(75, 23);
+            this.upButton.TabIndex = 16;
+            this.upButton.Text = "↑";
+            this.upButton.UseVisualStyleBackColor = true;
+            this.upButton.Click += new System.EventHandler(this.upButton_Click);
+            // 
+            // downButton
+            // 
+            this.downButton.AllowDrop = true;
+            this.downButton.Location = new System.Drawing.Point(262, 0);
+            this.downButton.Margin = new System.Windows.Forms.Padding(0);
+            this.downButton.Name = "downButton";
+            this.downButton.Size = new System.Drawing.Size(75, 23);
+            this.downButton.TabIndex = 17;
+            this.downButton.Text = "↓";
+            this.downButton.UseVisualStyleBackColor = true;
+            this.downButton.Click += new System.EventHandler(this.downButton_Click);
+            // 
+            // upDownPanel
+            // 
+            this.upDownPanel.Controls.Add(this.downButton);
+            this.upDownPanel.Controls.Add(this.upButton);
+            this.upDownPanel.Location = new System.Drawing.Point(240, 440);
+            this.upDownPanel.Name = "upDownPanel";
+            this.upDownPanel.Size = new System.Drawing.Size(465, 30);
+            this.upDownPanel.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 466);
+            this.ClientSize = new System.Drawing.Size(832, 481);
+            this.Controls.Add(this.upDownPanel);
+            this.Controls.Add(this.undoRename);
+            this.Controls.Add(this.rename);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.animeName);
             this.Controls.Add(this.addfile);
             this.Controls.Add(this.addAll);
             this.Controls.Add(this.add);
@@ -165,7 +249,9 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.upDownPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -183,6 +269,13 @@
         private System.Windows.Forms.Button addAll;
         private System.Windows.Forms.Button addfile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox animeName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button rename;
+        private System.Windows.Forms.Button undoRename;
+        private System.Windows.Forms.Button upButton;
+        private System.Windows.Forms.Button downButton;
+        private System.Windows.Forms.Panel upDownPanel;
     }
 }
 
