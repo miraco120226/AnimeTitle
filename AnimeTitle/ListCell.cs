@@ -28,36 +28,16 @@ namespace AnimeTitle
             editName.Text = text;
         }
 
-        private void ListCell_KeyDown(object sender, KeyEventArgs e)
+        public void setSize(int w, int h)
         {
-            if (e.KeyCode.ToString().Equals("Delete"))
-            {
-                int y = lco.owner.AutoScrollPosition.Y;
-
-                if (this is L_ListCell)
-                {
-                    cm.deleteCell(this as L_ListCell);
-                }
-                else if (this is R_ListCell)
-                {
-                    cm.deleteCell(this as R_ListCell);
-                }
-
-                lco.owner.AutoScrollPosition = new Point(0, -y);
-            }
-        }
-
-        private void editName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((int)e.KeyCode == 13)
-            {
-                e.SuppressKeyPress = true;
-                handleRename();
-                TextLabel.Visible = true;
-                TextLabel.Enabled = true;
-                editName.Visible = false;
-                editName.Enabled = false;
-            }
+            int width = w < 0 ? Width : w;
+            int height = h < 0 ? Height : h;
+            Width = width;
+            Height = height;
+            editName.Width = width;
+            editName.Height = height;
+            TextLabel.Width = width;
+            TextLabel.Height = height;
         }
 
         protected virtual void handleRename()
@@ -94,7 +74,7 @@ namespace AnimeTitle
             {
                 Pen p = new Pen(Color.FromArgb(0x89, 0xCA, 0xFF), 1);
                 Graphics g = e.Graphics;
-                g.DrawRectangle(p, new Rectangle(0, 0, this.Width-1, this.Height-1));
+                g.DrawRectangle(p, new Rectangle(0, 0, Width-1, Height-1));
                 this.BackColor = Color.FromArgb(0xCC, 0xE8, 0xFF);
             }            
         }
@@ -166,6 +146,38 @@ namespace AnimeTitle
             if (e.Button == MouseButtons.Left && (this is L_ListCell || this is R_ListCell) )
             {
                 DoDragDrop(this, DragDropEffects.Move);
+            }
+        }
+
+        private void ListCell_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString().Equals("Delete"))
+            {
+                int y = lco.owner.AutoScrollPosition.Y;
+
+                if (this is L_ListCell)
+                {
+                    cm.deleteCell(this as L_ListCell);
+                }
+                else if (this is R_ListCell)
+                {
+                    cm.deleteCell(this as R_ListCell);
+                }
+
+                lco.owner.AutoScrollPosition = new Point(0, -y);
+            }
+        }
+
+        private void editName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((int)e.KeyCode == 13)
+            {
+                e.SuppressKeyPress = true;
+                handleRename();
+                TextLabel.Visible = true;
+                TextLabel.Enabled = true;
+                editName.Visible = false;
+                editName.Enabled = false;
             }
         }
 

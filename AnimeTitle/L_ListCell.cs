@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AnimeTitle
 {
-    public partial class L_ListCell : AnimeTitle.ListCell
+    public partial class L_ListCell : global::AnimeTitle.ListCell
     {
         public static int width = 200;
         public static int height = 20;
@@ -25,10 +25,8 @@ namespace AnimeTitle
             TextLabel = GetTextLabel();
             editName = GetEditLabel();
 
-            Width = width;
-            Height = height;
-            editName.Width = width;
-            editName.Height = height;
+            MinimumSize = new Size(width, height);
+            setSize(width, height);
 
             lco = owner;
             cm = owner.cm;

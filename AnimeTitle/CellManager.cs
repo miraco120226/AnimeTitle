@@ -273,6 +273,11 @@ namespace AnimeTitle
             List<string> log = new List<string>();
             int index;
 
+            if (fs.Count == 0)
+            {
+                return true;
+            }
+
             for (index = 0; index < fs.Count; index++)
             {
                 rc = rightControl[index] as R_ListCell;

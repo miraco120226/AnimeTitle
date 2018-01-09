@@ -47,7 +47,7 @@
             // select
             // 
             this.select.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.select.Font = new System.Drawing.Font("新細明體", 10F);
+            this.select.Font = new System.Drawing.Font("新細明體", 11F);
             this.select.Location = new System.Drawing.Point(25, 300);
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(140, 30);

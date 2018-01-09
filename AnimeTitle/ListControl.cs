@@ -16,6 +16,8 @@ namespace AnimeTitle
         public List<string> leftList;
         public List<string> rightList;
         int MiddleWidth = 40;
+        public static int listWidth = 475;
+        public static int listHeight = 330;
         public Panel owner;
         public CellManager cm;
         public bool onDrag = false;
@@ -27,20 +29,24 @@ namespace AnimeTitle
 
             owner = p;
 
-            LeftNumPanel.Width = N_ListCell.width;
-            LeftNumPanel.Location = new Point(0, 0);
-            LeftPanel.Width = L_ListCell.width;
-            LeftPanel.Location = new Point(LeftNumPanel.Width, 0);
-            MiddlePanel.Width = MiddleWidth;
-            MiddlePanel.Location = new Point(LeftNumPanel.Width + LeftPanel.Width,0);
-            RightPanel.Width = R_ListCell.width;
-            RightPanel.Location = new Point(LeftNumPanel.Width + LeftPanel.Width + MiddlePanel.Width,0);
-
-            Width = LeftNumPanel.Width + LeftPanel.Width + MiddlePanel.Width + RightPanel.Width;
+            Height = 0;
+            flowLayoutPanel1.Height = 0;
             LeftNumPanel.Height = 0;
             LeftPanel.Height = 0;
             MiddlePanel.Height = 0;
             RightPanel.Height = 0;
+
+            LeftNumPanel.Width = N_ListCell.width;
+            LeftNumPanel.MinimumSize = new Size(LeftNumPanel.Width, 0);
+            LeftPanel.Width = L_ListCell.width;
+            LeftPanel.MinimumSize = new Size(LeftPanel.Width, 0);
+            MiddlePanel.Width = MiddleWidth;
+            MiddlePanel.MinimumSize = new Size(MiddlePanel.Width, 0);
+            RightPanel.Width = R_ListCell.width;
+            RightPanel.MinimumSize = new Size(RightPanel.Width, 0);
+
+            MinimumSize = new Size(listWidth, listHeight);
+            flowLayoutPanel1.MinimumSize = new Size(listWidth, listHeight);
 
             DoubleBuffered = true;
             PropertyInfo info0 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -51,8 +57,8 @@ namespace AnimeTitle
             info2.SetValue(MiddlePanel, true, null);
             PropertyInfo info3 = this.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
             info3.SetValue(RightPanel, true, null);
-            //setBackground(Color.FromArgb(200, 200, 200));
             setBackground(Color.White);
+            //setBackground(Color.FromArgb(200, 200, 200));
 
             cm = new CellManager(this,LeftNumPanel.Controls, LeftPanel.Controls, MiddlePanel.Controls, RightPanel.Controls);
 
@@ -159,6 +165,23 @@ namespace AnimeTitle
             onDrag = false;
             RightPanel.Refresh();
         }
-        
+
+        public void setWidth(int x)
+        {
+            int dx = x / 2 * 2;
+            Width = MinimumSize.Width + dx;
+            flowLayoutPanel1.Width = flowLayoutPanel1.MinimumSize.Width + dx;
+            LeftPanel.Width = LeftPanel.MinimumSize.Width + dx/2;
+            RightPanel.Width = RightPanel.MinimumSize.Width + dx/2;
+
+            foreach (R_ListCell rc in RightPanel.Controls)
+            {
+                rc.setSize(R_ListCell.width + dx / 2, -1);
+            }
+            foreach (L_ListCell lc in LeftPanel.Controls)
+            {
+                lc.setSize(L_ListCell.width + dx / 2, -1);
+            }
+        }
     }
 }

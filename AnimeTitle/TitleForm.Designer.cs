@@ -36,10 +36,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 10F);
+            this.label1.Font = new System.Drawing.Font("新細明體", 11F);
             this.label1.Location = new System.Drawing.Point(22, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 14);
+            this.label1.Size = new System.Drawing.Size(201, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "title找不到，請選擇title之欄位";
             // 
@@ -56,7 +56,7 @@
             // select
             // 
             this.select.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.select.Font = new System.Drawing.Font("新細明體", 10F);
+            this.select.Font = new System.Drawing.Font("新細明體", 11F);
             this.select.Location = new System.Drawing.Point(65, 273);
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(140, 30);

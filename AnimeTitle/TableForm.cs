@@ -62,7 +62,7 @@ namespace AnimeTitle
 
         private void setPage_Click(object sender, EventArgs e)
         {
-            FindPage fp = new FindPage(((Form1)Owner).url);
+            FindPage fp = new FindPage(((AnimeTitle)Owner).url);
             fp.StartPosition = FormStartPosition.CenterParent;
             fp.Owner = this;
             if (fp.ShowDialog() == DialogResult.OK)

@@ -14,6 +14,7 @@ namespace AnimeTitle
     {
         public HtmlAgilityPack.HtmlDocument newdoc = new HtmlAgilityPack.HtmlDocument();
         public HtmlAgilityPack.HtmlNode titleNode = null;
+        public string title="";
 
         public FindPage()
         {
@@ -67,6 +68,17 @@ namespace AnimeTitle
         private void select_Click(object sender, EventArgs e)
         {
             newdoc.LoadHtml(webBrowser1.DocumentText);
+
+            try
+            {
+                string tmp_title = newdoc.GetElementbyId("firstHeading").InnerText;
+                title = tmp_title.Replace("[編輯]","");
+            }
+            catch
+            {
+
+            }
+
             TableForm tf = new TableForm(newdoc);
             tf.StartPosition = FormStartPosition.CenterParent;
             tf.Owner = this;

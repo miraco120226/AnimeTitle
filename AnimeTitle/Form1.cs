@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace AnimeTitle
 {
-    public partial class Form1 : Form
+    public partial class AnimeTitle : Form
     {
         List<string> episode = new List<string>();
         List<string> cht_Title = new List<string>();
@@ -29,38 +29,41 @@ namespace AnimeTitle
         public string getdata = "";
         ListControl lco;
 
-        public Form1()
+        public AnimeTitle()
         {
             InitializeComponent();
 
             lco = new ListControl(listPanel);
-            //lco.cm.addRightCell(@"D:\PICO\ccc\111.jpg");
-            //lco.cm.addRightCell(@"C:\222.mkv");
-            //lco.cm.addRightCell(@"C:\333.mkv");
-            //lco.cm.addRightCell(@"C:\444.mkv");
-            //lco.cm.addRightCell(@"C:\555.mkv");
-            //lco.cm.addRightCell(@"C:\666.mkv");
-            //lco.cm.addRightCell(@"C:\777.mkv");
-            //lco.cm.addRightCell(@"C:\888.mkv");
 
-            lco.cm.addRightCell(@"D:\test\1.txt");
-            lco.cm.addRightCell(@"D:\test\2.txt");
-            lco.cm.addRightCell(@"D:\test\3.txt");
-            lco.cm.addRightCell(@"D:\test\4.txt");
-            lco.cm.addRightCell(@"D:\test\5.txt");
-            lco.cm.addRightCell(@"D:\test\6.txt");
-            lco.cm.addRightCell(@"D:\test\7.txt");
-            lco.cm.addRightCell(@"D:\test\8.txt");
-            lco.cm.addRightCell(@"D:\test\9.txt");
-            lco.cm.addRightCell(@"D:\test\10.txt");
-            lco.cm.addRightCell(@"D:\test\11.txt");
-            lco.cm.addRightCell(@"D:\test\12.txt");
-            lco.cm.addRightCell(@"D:\test\13.txt");
+            //lco.cm.addRightCell(@"D:\test\1.txt");
+            //lco.cm.addRightCell(@"D:\test\2.txt");
+            //lco.cm.addRightCell(@"D:\test\3.txt");
+            //lco.cm.addRightCell(@"D:\test\4.txt");
+            //lco.cm.addRightCell(@"D:\test\5.txt");
+            //lco.cm.addRightCell(@"D:\test\6.txt");
+            //lco.cm.addRightCell(@"D:\test\7.txt");
+            //lco.cm.addRightCell(@"D:\test\8.txt");
+            //lco.cm.addRightCell(@"D:\test\9.txt");
+            //lco.cm.addRightCell(@"D:\test\10.txt");
+            //lco.cm.addRightCell(@"D:\test\11.txt");
+            //lco.cm.addRightCell(@"D:\test\12.txt");
+            //lco.cm.addRightCell(@"D:\test\13.txt");
 
+            //lco.cm.addLeftCell(@"D:\test\1.txt");
+            //lco.cm.addLeftCell(@"D:\test\2.txt");
+            //lco.cm.addLeftCell(@"D:\test\3.txt");
+            //lco.cm.addLeftCell(@"D:\test\4.txt");
+            //lco.cm.addLeftCell(@"D:\test\5.txt");
+            //lco.cm.addLeftCell(@"D:\test\6.txt");
+
+            //searchName.Text = "刀劍神域";
 
             listPanel.Controls.Add(lco);
-            listPanel.Width = lco.Width+18;
-            listPanel.AutoScrollMinSize = new Size(lco.Width, listPanel.Height+1);
+            listPanel.Width = lco.Width+20;
+            listPanel.MinimumSize = new Size(495, 330);
+            //listPanel.AutoScrollMinSize = new Size(lco.Width, listPanel.Height+1);
+
+            listView1.MinimumSize = listView1.Size;
 
             int dist = 30;
             DownBtnPanel.Size = new Size(listPanel.Width, 30);
@@ -74,7 +77,7 @@ namespace AnimeTitle
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(htmlData);
-            HtmlNode titleTable= removeSpaceAndNewLine(handleTitleText(doc));
+            HtmlNode titleTable = removeSpaceAndNewLine(handleTitleText(doc));
 
             return titleTable.InnerHtml;
         }
@@ -217,6 +220,7 @@ namespace AnimeTitle
                 if (fp.ShowDialog() == DialogResult.OK)
                 {
                     titleTable = fp.titleNode;
+                    animeName.Text = fp.title;
                 }
             }
 
@@ -295,13 +299,12 @@ namespace AnimeTitle
                 getdata = MyStreamReader.ReadToEnd();
                 MyStreamReader.Close();
                 MyStream.Close();
+                //MessageBox.Show("OK");
             }
             catch
             {
-
+                MessageBox.Show("獲得網站資料失敗");
             }
-
-            MessageBox.Show("OK");
 
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(getdata);
@@ -309,6 +312,16 @@ namespace AnimeTitle
             episode.Clear();
             cht_Title.Clear();
             listView1.Items.Clear();
+
+            try
+            {
+                animeName.Text = doc.GetElementbyId("firstHeading").InnerText;
+            }
+            catch
+            {
+                animeName.Text = searchName.Text;
+            }
+            
 
             try
             {
@@ -325,7 +338,6 @@ namespace AnimeTitle
             {
                 MessageBox.Show("發生錯誤");
             }
-            animeName.Text = searchName.Text;
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -442,6 +454,31 @@ namespace AnimeTitle
         private void cleanRight_Click(object sender, EventArgs e)
         {
             lco.cm.cleanRightCell();
+        }
+
+        private void searchName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue == 13)
+            {
+                searchButton.PerformClick();
+            }
+        }
+
+        private void AnimeTitle_Resize(object sender, EventArgs e)
+        {
+            int dx = Width - MinimumSize.Width;
+            int dy = Height - MinimumSize.Height;
+
+            RightPanel.Width = RightPanel.MinimumSize.Width + dx;
+            UpBtnPanel.Width = UpBtnPanel.MinimumSize.Width + dx;
+            listPanel.Width = listPanel.MinimumSize.Width + dx;
+            DownBtnPanel.Width = DownBtnPanel.MinimumSize.Width + dx;
+            lco.setWidth(dx);
+
+            LeftPanel.Height = LeftPanel.MinimumSize.Height + dy;
+            RightPanel.Height = RightPanel.MinimumSize.Height + dy;
+            listView1.Height = listView1.MinimumSize.Height + dy;
+            listPanel.Height = listPanel.MinimumSize.Height + dy;
         }
     }
 }

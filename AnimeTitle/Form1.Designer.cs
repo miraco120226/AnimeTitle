@@ -1,6 +1,6 @@
 ﻿namespace AnimeTitle
 {
-    partial class Form1
+    partial class AnimeTitle
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -47,17 +47,24 @@
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
             this.DownBtnPanel = new System.Windows.Forms.Panel();
-            this.cleanLeft = new System.Windows.Forms.Button();
             this.cleanRight = new System.Windows.Forms.Button();
+            this.cleanLeft = new System.Windows.Forms.Button();
+            this.LeftPanel = new System.Windows.Forms.Panel();
+            this.UpBtnPanel = new System.Windows.Forms.Panel();
+            this.RightPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.DownBtnPanel.SuspendLayout();
+            this.LeftPanel.SuspendLayout();
+            this.UpBtnPanel.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(9, 74);
+            this.searchButton.Location = new System.Drawing.Point(0, 60);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(0);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(171, 37);
+            this.searchButton.Size = new System.Drawing.Size(190, 25);
             this.searchButton.TabIndex = 0;
             this.searchButton.Text = "搜尋";
             this.searchButton.UseVisualStyleBackColor = true;
@@ -68,9 +75,10 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.epi_col,
             this.title_col});
-            this.listView1.Location = new System.Drawing.Point(17, 158);
+            this.listView1.Location = new System.Drawing.Point(10, 100);
+            this.listView1.Margin = new System.Windows.Forms.Padding(0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(188, 239);
+            this.listView1.Size = new System.Drawing.Size(190, 272);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -78,6 +86,7 @@
             // epi_col
             // 
             this.epi_col.Text = "集數";
+            this.epi_col.Width = 50;
             // 
             // title_col
             // 
@@ -87,16 +96,18 @@
             // searchName
             // 
             this.searchName.Font = new System.Drawing.Font("新細明體", 10F);
-            this.searchName.Location = new System.Drawing.Point(9, 37);
+            this.searchName.Location = new System.Drawing.Point(0, 25);
+            this.searchName.Margin = new System.Windows.Forms.Padding(0);
             this.searchName.Name = "searchName";
-            this.searchName.Size = new System.Drawing.Size(172, 23);
+            this.searchName.Size = new System.Drawing.Size(190, 23);
             this.searchName.TabIndex = 2;
-            this.searchName.Text = "刀劍神域";
+            this.searchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchName_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(0, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 3;
@@ -107,25 +118,30 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.searchName);
             this.panel1.Controls.Add(this.searchButton);
-            this.panel1.Location = new System.Drawing.Point(17, 18);
+            this.panel1.Location = new System.Drawing.Point(10, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(188, 124);
+            this.panel1.Size = new System.Drawing.Size(195, 95);
             this.panel1.TabIndex = 4;
             // 
             // listPanel
             // 
             this.listPanel.AutoScroll = true;
             this.listPanel.BackColor = System.Drawing.Color.White;
-            this.listPanel.Location = new System.Drawing.Point(240, 30);
+            this.listPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listPanel.Location = new System.Drawing.Point(5, 42);
+            this.listPanel.Margin = new System.Windows.Forms.Padding(0);
             this.listPanel.Name = "listPanel";
-            this.listPanel.Size = new System.Drawing.Size(465, 400);
+            this.listPanel.Size = new System.Drawing.Size(495, 330);
             this.listPanel.TabIndex = 8;
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(17, 417);
+            this.add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.add.Location = new System.Drawing.Point(10, 385);
+            this.add.Margin = new System.Windows.Forms.Padding(0);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(85, 35);
+            this.add.Size = new System.Drawing.Size(85, 25);
             this.add.TabIndex = 9;
             this.add.Text = "加入";
             this.add.UseVisualStyleBackColor = true;
@@ -133,9 +149,11 @@
             // 
             // addAll
             // 
-            this.addAll.Location = new System.Drawing.Point(120, 417);
+            this.addAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addAll.Location = new System.Drawing.Point(115, 385);
+            this.addAll.Margin = new System.Windows.Forms.Padding(0);
             this.addAll.Name = "addAll";
-            this.addAll.Size = new System.Drawing.Size(85, 35);
+            this.addAll.Size = new System.Drawing.Size(85, 25);
             this.addAll.TabIndex = 10;
             this.addAll.Text = "全部加入";
             this.addAll.UseVisualStyleBackColor = true;
@@ -143,9 +161,11 @@
             // 
             // addfile
             // 
-            this.addfile.Location = new System.Drawing.Point(734, 53);
+            this.addfile.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addfile.Location = new System.Drawing.Point(420, 0);
+            this.addfile.Margin = new System.Windows.Forms.Padding(0);
             this.addfile.Name = "addfile";
-            this.addfile.Size = new System.Drawing.Size(75, 23);
+            this.addfile.Size = new System.Drawing.Size(75, 25);
             this.addfile.TabIndex = 11;
             this.addfile.Text = "加入檔案";
             this.addfile.UseVisualStyleBackColor = true;
@@ -160,27 +180,29 @@
             // animeName
             // 
             this.animeName.Font = new System.Drawing.Font("新細明體", 10F);
-            this.animeName.Location = new System.Drawing.Point(295, 4);
+            this.animeName.Location = new System.Drawing.Point(35, 0);
+            this.animeName.Margin = new System.Windows.Forms.Padding(0);
             this.animeName.Name = "animeName";
-            this.animeName.Size = new System.Drawing.Size(150, 23);
+            this.animeName.Size = new System.Drawing.Size(180, 23);
             this.animeName.TabIndex = 12;
             this.animeName.TextChanged += new System.EventHandler(this.animeName_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 10);
+            this.label2.Location = new System.Drawing.Point(0, 6);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "動畫標題";
+            this.label2.Text = "標題";
             // 
             // rename
             // 
-            this.rename.Location = new System.Drawing.Point(502, 5);
+            this.rename.Location = new System.Drawing.Point(240, 0);
+            this.rename.Margin = new System.Windows.Forms.Padding(0);
             this.rename.Name = "rename";
-            this.rename.Size = new System.Drawing.Size(75, 23);
+            this.rename.Size = new System.Drawing.Size(75, 25);
             this.rename.TabIndex = 14;
             this.rename.Text = "改名";
             this.rename.UseVisualStyleBackColor = true;
@@ -188,9 +210,10 @@
             // 
             // undoRename
             // 
-            this.undoRename.Location = new System.Drawing.Point(617, 5);
+            this.undoRename.Location = new System.Drawing.Point(325, 0);
+            this.undoRename.Margin = new System.Windows.Forms.Padding(0);
             this.undoRename.Name = "undoRename";
-            this.undoRename.Size = new System.Drawing.Size(75, 23);
+            this.undoRename.Size = new System.Drawing.Size(75, 25);
             this.undoRename.TabIndex = 15;
             this.undoRename.Text = "復原改名";
             this.undoRename.UseVisualStyleBackColor = true;
@@ -201,7 +224,7 @@
             this.upButton.Location = new System.Drawing.Point(130, 0);
             this.upButton.Margin = new System.Windows.Forms.Padding(0);
             this.upButton.Name = "upButton";
-            this.upButton.Size = new System.Drawing.Size(75, 23);
+            this.upButton.Size = new System.Drawing.Size(75, 25);
             this.upButton.TabIndex = 16;
             this.upButton.Text = "↑";
             this.upButton.UseVisualStyleBackColor = true;
@@ -213,7 +236,7 @@
             this.downButton.Location = new System.Drawing.Point(262, 0);
             this.downButton.Margin = new System.Windows.Forms.Padding(0);
             this.downButton.Name = "downButton";
-            this.downButton.Size = new System.Drawing.Size(75, 23);
+            this.downButton.Size = new System.Drawing.Size(75, 25);
             this.downButton.TabIndex = 17;
             this.downButton.Text = "↓";
             this.downButton.UseVisualStyleBackColor = true;
@@ -221,25 +244,17 @@
             // 
             // DownBtnPanel
             // 
+            this.DownBtnPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.DownBtnPanel.Controls.Add(this.cleanRight);
             this.DownBtnPanel.Controls.Add(this.downButton);
             this.DownBtnPanel.Controls.Add(this.cleanLeft);
             this.DownBtnPanel.Controls.Add(this.upButton);
-            this.DownBtnPanel.Location = new System.Drawing.Point(240, 440);
+            this.DownBtnPanel.Location = new System.Drawing.Point(5, 385);
+            this.DownBtnPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.DownBtnPanel.MinimumSize = new System.Drawing.Size(475, 25);
             this.DownBtnPanel.Name = "DownBtnPanel";
-            this.DownBtnPanel.Size = new System.Drawing.Size(465, 30);
+            this.DownBtnPanel.Size = new System.Drawing.Size(475, 25);
             this.DownBtnPanel.TabIndex = 18;
-            // 
-            // cleanLeft
-            // 
-            this.cleanLeft.Location = new System.Drawing.Point(32, 0);
-            this.cleanLeft.Margin = new System.Windows.Forms.Padding(0);
-            this.cleanLeft.Name = "cleanLeft";
-            this.cleanLeft.Size = new System.Drawing.Size(75, 23);
-            this.cleanLeft.TabIndex = 16;
-            this.cleanLeft.Text = "清除";
-            this.cleanLeft.UseVisualStyleBackColor = true;
-            this.cleanLeft.Click += new System.EventHandler(this.cleanLeft_Click);
             // 
             // cleanRight
             // 
@@ -247,38 +262,86 @@
             this.cleanRight.Location = new System.Drawing.Point(358, 0);
             this.cleanRight.Margin = new System.Windows.Forms.Padding(0);
             this.cleanRight.Name = "cleanRight";
-            this.cleanRight.Size = new System.Drawing.Size(75, 23);
+            this.cleanRight.Size = new System.Drawing.Size(75, 25);
             this.cleanRight.TabIndex = 17;
             this.cleanRight.Text = "清除";
             this.cleanRight.UseVisualStyleBackColor = true;
             this.cleanRight.Click += new System.EventHandler(this.cleanRight_Click);
             // 
-            // Form1
+            // cleanLeft
+            // 
+            this.cleanLeft.Location = new System.Drawing.Point(32, 0);
+            this.cleanLeft.Margin = new System.Windows.Forms.Padding(0);
+            this.cleanLeft.Name = "cleanLeft";
+            this.cleanLeft.Size = new System.Drawing.Size(75, 25);
+            this.cleanLeft.TabIndex = 16;
+            this.cleanLeft.Text = "清除";
+            this.cleanLeft.UseVisualStyleBackColor = true;
+            this.cleanLeft.Click += new System.EventHandler(this.cleanLeft_Click);
+            // 
+            // LeftPanel
+            // 
+            this.LeftPanel.Controls.Add(this.panel1);
+            this.LeftPanel.Controls.Add(this.listView1);
+            this.LeftPanel.Controls.Add(this.addAll);
+            this.LeftPanel.Controls.Add(this.add);
+            this.LeftPanel.Location = new System.Drawing.Point(10, 10);
+            this.LeftPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.LeftPanel.MinimumSize = new System.Drawing.Size(210, 420);
+            this.LeftPanel.Name = "LeftPanel";
+            this.LeftPanel.Size = new System.Drawing.Size(210, 420);
+            this.LeftPanel.TabIndex = 19;
+            // 
+            // UpBtnPanel
+            // 
+            this.UpBtnPanel.Controls.Add(this.label2);
+            this.UpBtnPanel.Controls.Add(this.animeName);
+            this.UpBtnPanel.Controls.Add(this.addfile);
+            this.UpBtnPanel.Controls.Add(this.rename);
+            this.UpBtnPanel.Controls.Add(this.undoRename);
+            this.UpBtnPanel.Location = new System.Drawing.Point(5, 5);
+            this.UpBtnPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.UpBtnPanel.MinimumSize = new System.Drawing.Size(495, 25);
+            this.UpBtnPanel.Name = "UpBtnPanel";
+            this.UpBtnPanel.Size = new System.Drawing.Size(495, 25);
+            this.UpBtnPanel.TabIndex = 20;
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.Controls.Add(this.UpBtnPanel);
+            this.RightPanel.Controls.Add(this.listPanel);
+            this.RightPanel.Controls.Add(this.DownBtnPanel);
+            this.RightPanel.Location = new System.Drawing.Point(220, 10);
+            this.RightPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.RightPanel.MinimumSize = new System.Drawing.Size(510, 420);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(510, 420);
+            this.RightPanel.TabIndex = 20;
+            // 
+            // AnimeTitle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 481);
-            this.Controls.Add(this.DownBtnPanel);
-            this.Controls.Add(this.undoRename);
-            this.Controls.Add(this.rename);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.animeName);
-            this.Controls.Add(this.addfile);
-            this.Controls.Add(this.addAll);
-            this.Controls.Add(this.add);
-            this.Controls.Add(this.listPanel);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(739, 436);
+            this.Controls.Add(this.RightPanel);
+            this.Controls.Add(this.LeftPanel);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.KeyPreview = true;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(755, 475);
+            this.Name = "AnimeTitle";
+            this.Text = "AnimeTitle";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Resize += new System.EventHandler(this.AnimeTitle_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.DownBtnPanel.ResumeLayout(false);
+            this.LeftPanel.ResumeLayout(false);
+            this.UpBtnPanel.ResumeLayout(false);
+            this.UpBtnPanel.PerformLayout();
+            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -305,6 +368,9 @@
         private System.Windows.Forms.Panel DownBtnPanel;
         private System.Windows.Forms.Button cleanRight;
         private System.Windows.Forms.Button cleanLeft;
+        private System.Windows.Forms.Panel LeftPanel;
+        private System.Windows.Forms.Panel UpBtnPanel;
+        private System.Windows.Forms.Panel RightPanel;
     }
 }
 

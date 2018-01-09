@@ -32,6 +32,8 @@
             this.MiddlePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.RightPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.LeftNumPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // LeftPanel
@@ -40,12 +42,13 @@
             this.LeftPanel.AutoSize = true;
             this.LeftPanel.BackColor = System.Drawing.Color.Red;
             this.LeftPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.LeftPanel.Location = new System.Drawing.Point(30, 0);
+            this.LeftPanel.Location = new System.Drawing.Point(35, 0);
             this.LeftPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.LeftPanel.MinimumSize = new System.Drawing.Size(200, 50);
             this.LeftPanel.Name = "LeftPanel";
             this.LeftPanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.LeftPanel.Size = new System.Drawing.Size(200, 400);
-            this.LeftPanel.TabIndex = 3;
+            this.LeftPanel.Size = new System.Drawing.Size(200, 50);
+            this.LeftPanel.TabIndex = 4;
             this.LeftPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DragDrop);
             this.LeftPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.LeftPanel_DragEnter);
             this.LeftPanel.DragLeave += new System.EventHandler(this.LeftPanel_DragLeave);
@@ -56,10 +59,12 @@
             this.MiddlePanel.AutoSize = true;
             this.MiddlePanel.BackColor = System.Drawing.Color.Yellow;
             this.MiddlePanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.MiddlePanel.Location = new System.Drawing.Point(230, 0);
+            this.MiddlePanel.Location = new System.Drawing.Point(235, 0);
             this.MiddlePanel.Margin = new System.Windows.Forms.Padding(0);
+            this.MiddlePanel.MinimumSize = new System.Drawing.Size(40, 50);
             this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(20, 400);
+            this.MiddlePanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.MiddlePanel.Size = new System.Drawing.Size(40, 50);
             this.MiddlePanel.TabIndex = 4;
             // 
             // RightPanel
@@ -68,11 +73,12 @@
             this.RightPanel.AutoSize = true;
             this.RightPanel.BackColor = System.Drawing.Color.Blue;
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.RightPanel.Location = new System.Drawing.Point(250, 0);
+            this.RightPanel.Location = new System.Drawing.Point(275, 0);
             this.RightPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.RightPanel.MinimumSize = new System.Drawing.Size(200, 50);
             this.RightPanel.Name = "RightPanel";
             this.RightPanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.RightPanel.Size = new System.Drawing.Size(200, 400);
+            this.RightPanel.Size = new System.Drawing.Size(200, 50);
             this.RightPanel.TabIndex = 4;
             this.RightPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Panel_DragDrop);
             this.RightPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.RightPanel_DragEnter);
@@ -86,9 +92,26 @@
             this.LeftNumPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.LeftNumPanel.Location = new System.Drawing.Point(0, 0);
             this.LeftNumPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.LeftNumPanel.MinimumSize = new System.Drawing.Size(35, 50);
             this.LeftNumPanel.Name = "LeftNumPanel";
-            this.LeftNumPanel.Size = new System.Drawing.Size(30, 400);
+            this.LeftNumPanel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.LeftNumPanel.Size = new System.Drawing.Size(35, 50);
             this.LeftNumPanel.TabIndex = 4;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.LeftNumPanel);
+            this.flowLayoutPanel1.Controls.Add(this.LeftPanel);
+            this.flowLayoutPanel1.Controls.Add(this.MiddlePanel);
+            this.flowLayoutPanel1.Controls.Add(this.RightPanel);
+            this.flowLayoutPanel1.ForeColor = System.Drawing.Color.Black;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(475, 400);
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // ListControl
             // 
@@ -96,13 +119,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.LeftNumPanel);
-            this.Controls.Add(this.RightPanel);
-            this.Controls.Add(this.MiddlePanel);
-            this.Controls.Add(this.LeftPanel);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ListControl";
-            this.Size = new System.Drawing.Size(450, 400);
+            this.Size = new System.Drawing.Size(475, 400);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,5 +135,6 @@
         private System.Windows.Forms.FlowLayoutPanel MiddlePanel;
         private System.Windows.Forms.FlowLayoutPanel RightPanel;
         private System.Windows.Forms.FlowLayoutPanel LeftNumPanel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
